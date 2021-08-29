@@ -1,6 +1,10 @@
 .app{
-    background-color: transparent;
+    background-color: #fff;
     text-align:left;
+    font-size: x-large;
+    display: flex;
+    flex: 0 0 50%;
+    flex-direction:row;
 }
 
 button{

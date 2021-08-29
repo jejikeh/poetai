@@ -1,98 +1,106 @@
-import { useEffect,useState,useRef } from "react";
-import { EditorState } from "@codemirror/state";
-import { EditorView, keymap, highlightActiveLine} from '@codemirror/view'
-import { defaultKeymap } from "@codemirror/commands";
-import { history,historyKeymap} from "@codemirror/history";
-import { indentOnInput, syntaxTree } from "@codemirror/language";
-import { bracketMatching } from "@codemirror/matchbrackets";
-import { lineNumbers, highlightActiveLineGutter } from "@codemirror/gutter";
-import { defaultHighlightStyle, HighlightStyle, tags } from "@codemirror/highlight";
-import { markdown, markdownLanguage } from "@codemirror/lang-markdown";
-import { languages  } from "@codemirror/language-data";
-import { oneDark } from "@codemirror/theme-one-dark";
-import { javascript } from "@codemirror/lang-javascript";
+
+import { useEffect,useState,useRef } from 'react';
+import { EditorState } from '@codemirror/state';
+import { EditorView, keymap, highlightActiveLine} from '@codemirror/view';
+import { defaultKeymap } from '@codemirror/commands';
+import { history,historyKeymap} from '@codemirror/history';
+import { indentOnInput /*syntaxTree */ } from '@codemirror/language';
+import { bracketMatching } from '@codemirror/matchbrackets';
+import { lineNumbers, highlightActiveLineGutter } from '@codemirror/gutter';
+import { defaultHighlightStyle, HighlightStyle, tags } from '@codemirror/highlight';
+import { markdown, markdownLanguage } from '@codemirror/lang-markdown';
+import { languages  } from '@codemirror/language-data';
+//import { oneDark } from '@codemirror/theme-one-dark';
+//import { javascript } from '@codemirror/lang-javascript';
 
 
 
-const cursor = '#ffff'
-const darkBackground = "#ffff"
-const ivory = "#fffff"
-const selection = "#fffff"
-const highlightBackground = "#FFFFFF"
-const background = "#FFFFF"
-const stone = "#FLE"
-const backgroundColor = null
-const color = null
-const caretColor = null
-const searchMatch= null
-const foldPlaceholder = null
-const selectionMatch = null
-const nonmatchingBractet = null
-const activeLineGutter = null
+const cursor = '#E53525 !important';
+const darkBackground = '#E53525 !important';
+const ivory = '#E53525 !important';
+const selection = '#19E5C5 !important';
+const highlightBackground = '#FFFFFF !important';
+const background = '#FFFFFF !important';
+const stone = '#C8BFBF !important';
+const backgroundColor = '#FFFFFF !important';
+const color = '#26292A !important';
+const caretColor = '#26292A !important';
+const searchMatch= '#26292A !important';
+const searchMatchSelected= '#26292A !important';
+
+const foldPlaceholder = '#26292A !important';
+const selectionMatch = '#26292A !important';
+const nonmatchingBractet = null;
+const activeLineGutter = '#26292A !important';
 
 
 export const transparrentTheme  = EditorView.theme({
     '&': {
         backgroundColor: backgroundColor,
         color : color,
-        height: '1000%'
     },
-    ".cm-content": {
-        caretColor : caretColor
+    '.cm-content': {
+        caretColor : caretColor,
     },
-    "&.cm-focused .cm-cursor": { 
-        borderLeftColor: cursor 
+    '&.cm-focused .cm-cursor': { 
+        borderLeftColor: cursor, 
     },
-    "&.cm-focused .cm-selectionBackground, .cm-selectionBackground, ::selection": { backgroundColor: selection },
-    ".cm-panels": { backgroundColor: darkBackground, color: ivory },
-    ".cm-panels.cm-panels-top": { borderBottom: "2px solid black" },
-    ".cm-panels.cm-panels-bottom": { borderTop: "2px solid black" },
-    ".cm-searchMatch": {
-        backgroundColor: "#72a1ff59",
-        outline: "1px solid #457dff"
+    '&.cm-focused .cm-selectionBackground, .cm-selectionBackground, ::selection': { backgroundColor: selection },
+    '.cm-panels': { backgroundColor: darkBackground, color: ivory },
+    '.cm-panels.cm-panels-top': { borderBottom: '2px solid black' },
+    '.cm-panels.cm-panels-bottom': { borderTop: '2px solid black' },
+    '.cm-searchMatch': {
+        backgroundColor: searchMatch,
+        outline: '2px solid #457dff',
     },
-    ".cm-searchMatch.cm-searchMatch-selected": {
-        backgroundColor: searchMatch
+    '.cm-searchMatch.cm-searchMatch-selected': {
+        backgroundColor: searchMatchSelected,
     },
-    ".cm-activeLine": { backgroundColor: highlightBackground },
-    ".cm-selectionMatch": { backgroundColor: selectionMatch },
-    ".cm-matchingBracket, .cm-nonmatchingBracket": {
+    '.cm-activeLine': { backgroundColor: highlightBackground },
+    '.cm-selectionMatch': { backgroundColor: selectionMatch },
+    '.cm-matchingBracket, .cm-nonmatchingBracket': {
         backgroundColor: nonmatchingBractet,
-        outline: "1px solid #515a6b"
+        outline: '1px solid #515a6b',
     },
-    ".cm-gutters": {
+    '.cm-gutters': {
         backgroundColor: background,
         color: stone,
-        border: "none"
+        border: '2px solid #26292A',
     },
-    ".cm-activeLineGutter": {
+    '.cm-activeLineGutter': {
         backgroundColor: activeLineGutter,
     },
-    ".cm-foldPlaceholder": {
-        backgroundColor: "transparent",
-        border: "none",
-        color: foldPlaceholder
+    '.cm-foldPlaceholder': {
+        backgroundColor: 'transparent',
+        border: 'none',
+        color: foldPlaceholder,
     },
-    ".cm-tooltip": {
-        border: "1px solid #181a1f",
-        backgroundColor: darkBackground
+    '.cm-tooltip': {
+        border: '3px solid #181a1f',
+        backgroundColor: darkBackground,
     },
-    ".cm-tooltip-autocomplete": {
-        "& > ul > li[aria-selected]": {
+    '.cm-tooltip-autocomplete': {
+        '& > ul > li[aria-selected]': {
             backgroundColor: highlightBackground,
-            color: ivory
-        }
-    }
-})
+            color: ivory,
+        },
+    },
+});
 
-const violet = null
-const coral = null
-const malibu = null
-const whiskey = null
-const chalky = null
-const cyan = null
-const sage  = null
-const invalid = null
+const violet = '#26292A !important';
+const coral = '#26292A !important';
+const malibu = '#19E5C5 !important';
+const whiskey = '#19E5C5 !important';
+const chalky = '#807D7E !important';
+const cyan = '#616061 !important';
+const sage  = '#616061 !important';
+const invalid = '#26292A !important';
+
+const head1 = '#26292A !important';
+const head2 = '#616061 !important';
+const head3 = '#807D7E !important';
+const head4 = '#9E999A !important';
+const head5 = '#C8BFBF !important';
 
 const syntaxHighlighting = HighlightStyle.define([
     { tag: tags.keyword,
@@ -112,16 +120,16 @@ const syntaxHighlighting = HighlightStyle.define([
     { tag: [tags.meta, tags.comment],
         color: stone },
     { tag: tags.strong,
-        fontWeight: "bold" },
+        fontWeight: 'bold' },
     { tag: tags.emphasis,
-        fontStyle: "italic" },
+        fontStyle: 'italic' },
     { tag: tags.strikethrough,
-        textDecoration: "line-through" },
+        textDecoration: 'line-through' },
     { tag: tags.link,
         color: stone,
-        textDecoration: "underline" },
+        textDecoration: 'underline' },
     { tag: tags.heading,
-        fontWeight: "bold",
+        fontWeight: 'bold',
         color: coral },
     { tag: [tags.atom, tags.bool, /*@__PURE__*/tags.special(tags.variableName)],
         color: whiskey },
@@ -132,34 +140,40 @@ const syntaxHighlighting = HighlightStyle.define([
     {
         tag: tags.heading1,
         fontSize : '1.8em',
-        fontWeight : 'bold'
+        fontWeight : 'bold',
+        color : head1,
     },
     { 
         tag: tags.heading2,
         fontSize : '1.6em',
-        fontWeight : 'bold'
+        fontWeight : 'bold',
+        color : head2,
     },
     {
         tag: tags.heading3,
         fontSize : '1.4em',
-        fontWeight : "bold"
+        fontWeight : 'bold',
+        color : head3,
     },
     {
         tag: tags.heading4,
-        fontSize : "1.2em",
-        fontWeight : "bold"
+        fontSize : '1.2em',
+        fontWeight : 'bold',
+        color : head4,
     },
     {
         tag : tags.heading5,
-        fontSize : "1em",
-        fontWeight : "bold",
+        fontSize : '1em',
+        fontWeight : 'bold',
+        color : head5,
     },
     {
         tag: tags.heading6,
-        fontSize : "0.8em",
-        fontWeight : "bold"
-    }
-])
+        fontSize : '0.8em',
+        fontWeight : 'bold',
+        color : head5,
+    },
+]);
 
 
 import type React from 'react';
@@ -170,14 +184,14 @@ interface Props {
 }
 
 const useCodeMirror = <T extends Element>(
-    props : Props
+    props : Props,
 ):[React.MutableRefObject<T | null>, EditorView?] => {
-    const refContainer = useRef<T>(null)
-    const [ editorView, setEditorView ] = useState<EditorView>()
-    const { onChange } = props
+    const refContainer = useRef<T>(null);
+    const [ editorView, setEditorView ] = useState<EditorView>();
+    const { onChange } = props;
 
     useEffect(() => {
-        if(!refContainer.current) return
+        if(!refContainer.current) return;
 
         const startState = EditorState.create({
             doc : props.initialDoc,
@@ -193,28 +207,28 @@ const useCodeMirror = <T extends Element>(
                 markdown({
                     base : markdownLanguage,
                     codeLanguages : languages,
-                    addKeymap : true
+                    addKeymap : true,
                 }),
                 transparrentTheme,
                 syntaxHighlighting,
                 EditorView.lineWrapping,
                 EditorView.updateListener.of(update => {
                     if (update.changes) {
-                        onChange && onChange(update.state)
+                        onChange && onChange(update.state);
                     }
-                })
-            ]
-        })
+                }),
+            ],
+        });
 
         const view = new EditorView({
             state : startState,
-            parent : refContainer.current
-        })
+            parent : refContainer.current,
+        });
 
-        setEditorView(view)
-    },[refContainer])
+        setEditorView(view);
+    },[refContainer]);
 
-    return [refContainer, editorView]
-}
+    return [refContainer, editorView];
+};
 
 export default useCodeMirror;
